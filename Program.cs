@@ -1,4 +1,7 @@
 
+using PhonebookAPI.Interfaces;
+using PhonebookAPI.Services;
+
 namespace PhonebookAPI
 {
     public class Program
@@ -12,6 +15,14 @@ namespace PhonebookAPI
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSingleton<IContact, ContactService>();
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
