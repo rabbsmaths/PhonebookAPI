@@ -23,6 +23,7 @@ namespace PhonebookAPI
                     policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
@@ -33,6 +34,7 @@ namespace PhonebookAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors();
 
             app.UseHttpsRedirection();
 

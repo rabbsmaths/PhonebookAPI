@@ -29,7 +29,7 @@ namespace PhonebookAPI.Controllers
             try
             {
                 _service.Add(contact);
-                return CreatedAtAction(nameof(GetAll), contact);
+                return Ok(new { message = "Contact created successfully." });
             }
             catch (Exception ex)
             {
@@ -41,12 +41,12 @@ namespace PhonebookAPI.Controllers
         public IActionResult Update(string phoneNumber, Contact contact)
         {
             if (phoneNumber != contact.PhoneNumber)
-                return BadRequest("Phone number mismatch.");
+                return BadRequest(new { message = "Phone number mismatch." });
 
             try
             {
                 _service.Update(contact);
-                return Ok("Contact updated successfully.");
+                return Ok(new { message = "Contact updated successfully." });
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace PhonebookAPI.Controllers
         public IActionResult Delete(string phoneNumber)
         {
             _service.Delete(phoneNumber);
-            return Ok("Contact deleted successfully.");
+            return Ok(new { message = "Contact deleted successfully." });
         }
 
     }
